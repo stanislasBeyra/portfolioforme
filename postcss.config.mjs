@@ -1,6 +1,9 @@
 const config = {
   plugins: {
-    "@tailwindcss/postcss": {},
+    "@tailwindcss/postcss": {
+      // Désactiver les optimisations WebAssembly de Tailwind
+      optimize: false,
+    },
   },
 };
 
