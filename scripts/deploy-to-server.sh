@@ -7,7 +7,7 @@ set -e
 
 # Configuration par défaut
 DEFAULT_SERVER="hostrootci@cpd-fi2.beyra.hostroot.ci"
-DEFAULT_PATH="/home/hostrootci/beyra.hostroot.ci"
+DEFAULT_PATH="/home/hostrootci/public_html/beyra.hostroot.ci"
 DEST="${1:-${DEFAULT_SERVER}:${DEFAULT_PATH}}"
 
 if [ ! -f ".next-build.tar.gz" ]; then
