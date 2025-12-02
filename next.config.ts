@@ -17,6 +17,15 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: false, // Désactiver l'optimisation CSS qui peut utiliser WebAssembly
   },
+  webpack: (config, { isServer }) => {
+    // Désactiver les optimisations WebAssembly qui consomment trop de mémoire
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: false,
+      layers: false,
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
