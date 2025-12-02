@@ -13,6 +13,15 @@
     "pm2:delete": "pm2 delete my-portfolio",
     "pm2:logs": "pm2 logs my-portfolio",
     "pm2:status": "pm2 status",
+    "docker:build": "docker build -t my-portfolio:latest .",
+    "docker:run": "docker run -p 1206:1206 my-portfolio:latest",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:restart": "docker-compose restart",
+    "docker:logs": "docker-compose logs -f",
+    "docker:ps": "docker-compose ps",
+    "docker:build-up": "docker-compose up -d --build",
+    "docker:clean": "docker-compose down && docker system prune -f",
     "lint": "eslint"
   },
   "dependencies": {
