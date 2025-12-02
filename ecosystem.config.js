@@ -4,7 +4,7 @@ module.exports = {
       name: 'my-portfolio',
       script: 'node_modules/next/dist/bin/next',
       args: 'start',
-      node_args: '--max-old-space-size=8192',
+      node_args: '--max-old-space-size=16384',
       instances: 1,
       exec_mode: 'fork',
       env: {
@@ -17,7 +17,7 @@ module.exports = {
       merge_logs: true,
       autorestart: true,
       watch: false,
-      max_memory_restart: '1G',
+      max_memory_restart: '2G',
     },
   ],
 };
