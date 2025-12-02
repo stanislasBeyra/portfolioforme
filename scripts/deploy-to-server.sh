@@ -1,11 +1,51 @@
 #!/bin/bash
 
 # Script pour transférer et déployer sur le serveur
-# Usage: ./scripts/deploy-to-server.sh [user@server:/path]
+# Usage depuis local: ./scripts/deploy-to-server.sh [user@server:/path]
+# Usage depuis serveur: ./scripts/deploy-to-server.sh (détecte automatiquement)
 
 set -e
 
-# Configuration par défaut
+# Détecter si on est sur le serveur (en vérifiant le chemin actuel)
+CURRENT_DIR=$(pwd)
+IS_ON_SERVER=false
+
+if [[ "$CURRENT_DIR" == *"/home/hostrootci/public_html/beyra.hostroot.ci"* ]] || [[ "$CURRENT_DIR" == "/home/hostrootci/public_html/beyra.hostroot.ci" ]]; then
+    IS_ON_SERVER=true
+fi
+
+# Si on est sur le serveur, extraire et démarrer localement
+if [ "$IS_ON_SERVER" = true ]; then
+    echo "🖥️  Detected: Running on server"
+    echo "📂 Current directory: $CURRENT_DIR"
+    
+    if [ ! -f ".next-build.tar.gz" ]; then
+        echo "❌ Error: .next-build.tar.gz not found in current directory"
+        echo "   Make sure the archive has been transferred to the server"
+        exit 1
+    fi
+    
+    echo "📥 Extracting archive..."
+    tar -xzf .next-build.tar.gz
+    
+    echo "🧹 Cleaning up..."
+    rm .next-build.tar.gz
+    
+    echo "🔄 Restarting application..."
+    npm run pm2:start:no-build || pm2 start ecosystem.config.js
+    
+    echo "📊 Checking status..."
+    pm2 status
+    
+    echo "✅ Deployment completed!"
+    echo "🌐 Application should be running on port 1206"
+    exit 0
+fi
+
+# Sinon, on est en local, transférer et déployer via SSH
+echo "💻 Detected: Running from local machine"
+
+# Configuration par défaut pour le déploiement depuis local
 DEFAULT_SERVER="hostrootci@cpd-fi2.beyra.hostroot.ci"
 DEFAULT_PATH="/home/hostrootci/public_html/beyra.hostroot.ci"
 
