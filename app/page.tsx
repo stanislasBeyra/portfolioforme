@@ -78,7 +78,7 @@ export default function Home() {
       <header className="border-b border-black py-8 md:py-10">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-light italic mb-2 tracking-tight">
-            Beyra Jean Didier Stanisas Aka
+            Beyra Jean Didier Stanislas Aka
           </h1>
           <p className="text-base md:text-lg lg:text-xl font-light text-gray-600">
             Ingénieur en Développement d'Applications
