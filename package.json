@@ -6,6 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "build:prod": "next build && pm2 start ecosystem.config.js",
+    "pm2:start": "next build && pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop my-portfolio",
+    "pm2:restart": "pm2 restart my-portfolio",
+    "pm2:delete": "pm2 delete my-portfolio",
+    "pm2:logs": "pm2 logs my-portfolio",
+    "pm2:status": "pm2 status",
     "lint": "eslint"
   },
   "dependencies": {
