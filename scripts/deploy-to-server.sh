@@ -26,7 +26,7 @@ if [ "$IS_ON_SERVER" = true ]; then
     fi
     
     echo "📥 Extracting archive..."
-    tar -xzf .next-build.tar.gz
+    tar -xzf .next-build.tar.gz 2>&1 | grep -v "Ignoring unknown extended header keyword" || true
     
     echo "🧹 Cleaning up..."
     rm .next-build.tar.gz
@@ -73,7 +73,7 @@ ssh ${SERVER_HOST} << EOF
 cd ${SERVER_PATH}
 if [ -f ".next-build.tar.gz" ]; then
     echo "📥 Extracting archive..."
-    tar -xzf .next-build.tar.gz
+    tar -xzf .next-build.tar.gz 2>&1 | grep -v "Ignoring unknown extended header keyword" || true
     rm .next-build.tar.gz
     echo "🔄 Restarting application..."
     npm run pm2:start:no-build || pm2 start ecosystem.config.js

@@ -14,7 +14,7 @@ if [ ! -d ".next" ]; then
 fi
 
 echo "📦 Creating archive..."
-tar -czf .next-build.tar.gz .next package.json
+tar --no-xattrs -czf .next-build.tar.gz .next package.json
 
 echo "✅ Build completed successfully!"
 echo ""
